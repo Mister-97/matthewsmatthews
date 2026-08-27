@@ -36,9 +36,9 @@ export default async function AdminPage() {
   )
 
   return (
-    <main style={{ maxWidth: '900px', margin: '0 auto', padding: '3rem 1.5rem' }}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2rem' }}>
-        <h1 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '2rem', margin: 0 }}>Maintenance Requests</h1>
+    <main style={{ maxWidth: '900px', margin: '0 auto', padding: 'clamp(1.5rem, 5vw, 3rem) 1.25rem' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem', marginBottom: '2rem' }}>
+        <h1 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 'clamp(1.5rem, 5vw, 2rem)', margin: 0 }}>Maintenance Requests</h1>
         <form action={adminSignOut}>
           <button type="submit" style={{ background: 'none', border: '1px solid #ccc', borderRadius: '4px', padding: '0.4rem 0.8rem', cursor: 'pointer', color: '#888', fontSize: '0.85rem' }}>
             Sign out

@@ -13,8 +13,8 @@ export default function LoginPage() {
   }
 
   return (
-    <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--bg, #faf8f5)' }}>
-      <form action={handleSubmit} style={{ background: '#fff', padding: '2.5rem', borderRadius: '12px', width: '100%', maxWidth: '360px', border: '1px solid #ede8de' }}>
+    <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--bg, #faf8f5)', padding: '1.5rem' }}>
+      <form action={handleSubmit} style={{ background: '#fff', padding: 'clamp(1.5rem, 6vw, 2.5rem)', borderRadius: '12px', width: '100%', maxWidth: '360px', border: '1px solid #ede8de' }}>
         <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem' }}>
           <img src="https://i.ibb.co/0yhg1SMc/matthews-property-logo.png" alt="Matthews & Matthews Property Investment & Management" style={{ height: '72px' }} />
         </div>
