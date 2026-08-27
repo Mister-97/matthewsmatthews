@@ -93,7 +93,7 @@ const faqSchema = {
       name: "How do I pay rent online?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Tenants can pay rent online anytime through the Matthews & Matthews tenant portal at renter.turbotenant.com.",
+        text: "Tenants can pay rent online anytime through the Matthews & Matthews tenant portal at https://matthewsandmatthews.com/login.",
       },
     },
     {
@@ -101,7 +101,7 @@ const faqSchema = {
       name: "How do I submit a maintenance request?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Log into your tenant portal at renter.turbotenant.com to submit and track maintenance requests from any device.",
+        text: "Log into your tenant portal at https://matthewsandmatthews.com/login to submit and track maintenance requests from any device.",
       },
     },
     {

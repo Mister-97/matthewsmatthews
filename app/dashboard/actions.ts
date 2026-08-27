@@ -1,6 +1,9 @@
 'use server'
 
+import { redirect } from 'next/navigation'
 import { createServerSupabase } from '@/lib/supabase/server'
+
+const MAX_PHOTO_BYTES = 8 * 1024 * 1024
 
 export type MaintenanceRequest = {
   id: string
@@ -25,6 +28,9 @@ export async function submitMaintenanceRequest(formData: FormData) {
 
   let photo_url: string | null = null
   if (photo && photo.size > 0) {
+    if (photo.size > MAX_PHOTO_BYTES) {
+      return { error: 'Photo is too large. Please choose one under 8MB.' }
+    }
     const path = `${user.id}/${Date.now()}-${photo.name}`
     const { error: uploadError } = await supabase.storage
       .from('maintenance-photos')
@@ -61,4 +67,10 @@ export async function getMyRequests(): Promise<MaintenanceRequest[]> {
     .order('created_at', { ascending: false })
 
   return data ?? []
+}
+
+export async function signOut() {
+  const supabase = await createServerSupabase()
+  await supabase.auth.signOut()
+  redirect('/login')
 }

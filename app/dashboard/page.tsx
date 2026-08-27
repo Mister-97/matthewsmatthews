@@ -3,13 +3,21 @@
 import { useState } from 'react'
 import MaintenanceTab from './MaintenanceTab'
 import PayRentTab from './PayRentTab'
+import { signOut } from './actions'
 
 export default function DashboardPage() {
   const [tab, setTab] = useState<'maintenance' | 'rent'>('maintenance')
 
   return (
     <main style={{ maxWidth: '700px', margin: '0 auto', padding: '3rem 1.5rem' }}>
-      <h1 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '2rem', marginBottom: '1.5rem', color: '#3a3a3a' }}>Tenant Dashboard</h1>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
+        <h1 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '2rem', margin: 0, color: '#3a3a3a' }}>Tenant Dashboard</h1>
+        <form action={signOut}>
+          <button type="submit" style={{ background: 'none', border: '1px solid #ede8de', borderRadius: '6px', padding: '0.4rem 0.8rem', cursor: 'pointer', color: '#888', fontSize: '0.85rem' }}>
+            Sign out
+          </button>
+        </form>
+      </div>
       <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '2rem', borderBottom: '1px solid #ede8de' }}>
         <button
           onClick={() => setTab('maintenance')}
