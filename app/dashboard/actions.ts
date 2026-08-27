@@ -102,6 +102,13 @@ export async function signOut() {
   redirect('/login')
 }
 
+export type Message = {
+  id: string
+  sender: 'tenant' | 'admin'
+  body: string
+  created_at: string
+}
+
 export async function sendTeamMessage(formData: FormData) {
   const supabase = await createServerSupabase()
   const { data: { user } } = await supabase.auth.getUser()
@@ -118,17 +125,41 @@ export async function sendTeamMessage(formData: FormData) {
     .eq('id', user.id)
     .single()
 
+  const { error: insertError } = await supabase.from('messages').insert({
+    tenant_id: user.id,
+    sender: 'tenant',
+    body: message.trim(),
+  })
+
+  if (insertError) {
+    return { error: 'Could not send your message. Please try again or call the office.' }
+  }
+
   try {
     await getResend().emails.send({
       from: PORTAL_FROM,
       to: TEAM_MESSAGE_TO,
       replyTo: user.email,
       subject: `Message from tenant — ${tenant?.name ?? 'Unknown tenant'}`,
-      text: `Tenant: ${tenant?.name ?? 'Unknown'}\nUnit: ${tenant?.unit ?? 'Unknown'}\nEmail: ${user.email}\n\n${message.trim()}`,
+      text: `Tenant: ${tenant?.name ?? 'Unknown'}\nUnit: ${tenant?.unit ?? 'Unknown'}\nEmail: ${user.email}\n\n${message.trim()}\n\nReply in the admin portal: https://matthewsmatthews.com/admin`,
     })
   } catch {
-    return { error: 'Could not send your message. Please try again or call the office.' }
+    // Notification email is best-effort — the message itself was saved successfully above.
   }
 
   return {}
+}
+
+export async function getMyMessages(): Promise<Message[]> {
+  const supabase = await createServerSupabase()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) return []
+
+  const { data } = await supabase
+    .from('messages')
+    .select('id, sender, body, created_at')
+    .eq('tenant_id', user.id)
+    .order('created_at', { ascending: true })
+
+  return data ?? []
 }
