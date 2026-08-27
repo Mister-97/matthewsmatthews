@@ -75,13 +75,6 @@ export default function Home() {
           </div>
           <div className="card">
             <div className="card-icon">
-              <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" /></svg>
-            </div>
-            <h3>Lease Management</h3>
-            <p>Access your lease documents, renewal info, and important notices all in one place.</p>
-          </div>
-          <div className="card">
-            <div className="card-icon">
               <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>
             </div>
             <h3>Direct Communication</h3>
@@ -94,13 +87,6 @@ export default function Home() {
             <h3>Quality Properties</h3>
             <p>We maintain every property to a high standard so you can feel at home from day one.</p>
           </div>
-          <div className="card">
-            <div className="card-icon">
-              <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 0 0-3-3.87" /><path d="M16 3.13a4 4 0 0 1 0 7.75" /></svg>
-            </div>
-            <h3>Responsive Team</h3>
-            <p>Real people who care. We&apos;re here to make your rental experience a great one.</p>
-          </div>
         </div>
       </div>
 
@@ -109,7 +95,7 @@ export default function Home() {
         <div className="portal-inner">
           <div className="portal-badge">Current Tenants</div>
           <h2>Everything You Need,<br /><em>All in One Place</em></h2>
-          <p>Log into your tenant portal to pay rent, submit maintenance requests, view your lease, and message your property manager. Anytime, from any device.</p>
+          <p>Log into your tenant portal to pay rent, submit maintenance requests, and message your property manager. Anytime, from any device.</p>
           <div className="portal-features">
             <div className="pf-tag">
               <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" /><line x1="1" y1="10" x2="23" y2="10" /></svg>
@@ -120,16 +106,8 @@ export default function Home() {
               Maintenance Requests
             </div>
             <div className="pf-tag">
-              <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /></svg>
-              View Lease Docs
-            </div>
-            <div className="pf-tag">
               <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>
               Message Manager
-            </div>
-            <div className="pf-tag">
-              <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10" /><line x1="12" y1="20" x2="12" y2="4" /><line x1="6" y1="20" x2="6" y2="14" /></svg>
-              Payment History
             </div>
           </div>
           <a href="/login" className="btn-portal-big">
@@ -156,7 +134,7 @@ export default function Home() {
               <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></svg>
             </div>
             <h4>Email</h4>
-            <p><a href="mailto:info@matthewsandmatthews.com">info@matthewsandmatthews.com</a></p>
+            <p><a href="mailto:RA@matthewsmatthews.com">RA@matthewsmatthews.com</a></p>
           </div>
           <div className="cc">
             <div className="cc-icon">

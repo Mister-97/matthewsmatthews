@@ -136,7 +136,7 @@ nav {
 .section-title h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 700; color: var(--charcoal); }
 .section-title h2 em { font-style: italic; color: var(--gold); }
 .section-title p { color: var(--muted); font-size: 0.88rem; margin-top: 0.5rem; line-height: 1.7; }
-.cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+.cards-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
 .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 2rem 1.5rem; text-align: center; transition: all 0.25s; }
 .card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.08); border-color: var(--gold-pale); }
 .card-icon { width: 52px; height: 52px; background: rgba(201,148,42,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.2rem; }
