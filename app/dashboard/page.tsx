@@ -3,10 +3,11 @@
 import { useState } from 'react'
 import MaintenanceTab from './MaintenanceTab'
 import PayRentTab from './PayRentTab'
+import MessageTab from './MessageTab'
 import { signOut } from './actions'
 
 export default function DashboardPage() {
-  const [tab, setTab] = useState<'maintenance' | 'rent'>('maintenance')
+  const [tab, setTab] = useState<'maintenance' | 'rent' | 'message'>('maintenance')
 
   return (
     <main style={{ maxWidth: '700px', margin: '0 auto', padding: '3rem 1.5rem' }}>
@@ -31,8 +32,16 @@ export default function DashboardPage() {
         >
           Pay Rent
         </button>
+        <button
+          onClick={() => setTab('message')}
+          style={{ padding: '0.8rem 1.2rem', border: 'none', background: 'none', cursor: 'pointer', fontWeight: 600, borderBottom: tab === 'message' ? '2px solid #c9942a' : '2px solid transparent', color: tab === 'message' ? '#c9942a' : '#888' }}
+        >
+          Message Team
+        </button>
       </div>
-      {tab === 'maintenance' ? <MaintenanceTab /> : <PayRentTab />}
+      {tab === 'maintenance' && <MaintenanceTab />}
+      {tab === 'rent' && <PayRentTab />}
+      {tab === 'message' && <MessageTab />}
     </main>
   )
 }
