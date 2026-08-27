@@ -1,45 +1,50 @@
 'use server'
 
-import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
+import { createServerSupabase } from '@/lib/supabase/server'
 import { createAdminSupabase } from '@/lib/supabase/admin'
 
-export async function adminLogin(formData: FormData) {
-  const password = formData.get('password') as string
-  const adminPassword = process.env.ADMIN_PASSWORD
+async function isAdmin(userId: string) {
+  const admin = createAdminSupabase()
+  const { data } = await admin.from('admins').select('id').eq('id', userId).single()
+  return Boolean(data)
+}
 
-  if (!adminPassword || password !== adminPassword) {
-    return { error: 'Incorrect password.' }
+export async function adminSignIn(formData: FormData) {
+  const email = formData.get('email') as string
+  const password = formData.get('password') as string
+
+  const supabase = await createServerSupabase()
+  const { data, error } = await supabase.auth.signInWithPassword({ email, password })
+
+  if (error || !data.user) {
+    return { error: 'Invalid email or password.' }
   }
 
-  const cookieStore = await cookies()
-  cookieStore.set('admin_session', adminPassword, {
-    httpOnly: true,
-    secure: true,
-    sameSite: 'lax',
-    maxAge: 60 * 60 * 24 * 7,
-    path: '/',
-  })
+  if (!(await isAdmin(data.user.id))) {
+    await supabase.auth.signOut()
+    return { error: 'This account does not have admin access.' }
+  }
 
   return {}
 }
 
 export async function adminSignOut() {
-  const cookieStore = await cookies()
-  cookieStore.delete('admin_session')
+  const supabase = await createServerSupabase()
+  await supabase.auth.signOut()
   redirect('/admin')
 }
 
 export async function updateRequestStatus(id: string, status: 'submitted' | 'in_progress' | 'done') {
-  const cookieStore = await cookies()
-  const adminPassword = process.env.ADMIN_PASSWORD
-  const cookie = cookieStore.get('admin_session')?.value
-  if (!adminPassword || !cookie || cookie !== adminPassword) {
+  const supabase = await createServerSupabase()
+  const { data: { user } } = await supabase.auth.getUser()
+
+  if (!user || !(await isAdmin(user.id))) {
     return { error: 'Not authorized.' }
   }
 
-  const supabase = createAdminSupabase()
-  const { error } = await supabase
+  const admin = createAdminSupabase()
+  const { error } = await admin
     .from('maintenance_requests')
     .update({ status, updated_at: new Date().toISOString() })
     .eq('id', id)

@@ -1,20 +1,22 @@
-import { cookies } from 'next/headers'
+import { createServerSupabase } from '@/lib/supabase/server'
 import { createAdminSupabase } from '@/lib/supabase/admin'
 import AdminLoginForm from './login-form'
 import AdminRequestRow from './AdminRequestRow'
 import { adminSignOut } from './actions'
 
 export default async function AdminPage() {
-  const cookieStore = await cookies()
-  const adminPassword = process.env.ADMIN_PASSWORD
-  const cookie = cookieStore.get('admin_session')?.value
-  const isAuthed = Boolean(adminPassword) && Boolean(cookie) && cookie === adminPassword
+  const serverSupabase = await createServerSupabase()
+  const { data: { user } } = await serverSupabase.auth.getUser()
+
+  const supabase = createAdminSupabase()
+
+  const isAuthed = user
+    ? Boolean((await supabase.from('admins').select('id').eq('id', user.id).single()).data)
+    : false
 
   if (!isAuthed) {
     return <AdminLoginForm />
   }
-
-  const supabase = createAdminSupabase()
   const { data: requests } = await supabase
     .from('maintenance_requests')
     .select('id, description, urgency, status, photo_url, created_at, tenants(name, unit)')

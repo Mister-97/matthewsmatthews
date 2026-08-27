@@ -9,5 +9,10 @@ export default async function DashboardLayout({ children }: { children: React.Re
     redirect('/login')
   }
 
+  const { data: tenant } = await supabase.from('tenants').select('id').eq('id', user.id).single()
+  if (!tenant) {
+    redirect('/login')
+  }
+
   return <>{children}</>
 }
